@@ -43,7 +43,7 @@ module.exports = function (options) {
         var route = _.find(routes, function (route) {
             return route.routeMatcher.test(file.relative);
         });
-
+        if (route === undefined){callback();return;}
         file.s3.path = file.s3.path.replace(route.routeMatcher, route.key);
         applyCacheHeaders(file, route);
         _.extend(file.s3.headers, route.headers);
